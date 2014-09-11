@@ -1,0 +1,3 @@
+#%Module1.0
+setenv GUILEHOME /opt/guile
+prepend-path PATH /opt/guile/bin
