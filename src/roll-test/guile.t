@@ -33,15 +33,10 @@ if($appliance =~ /$installedOnAppliancesPattern/) {
 SKIP: {
 
   skip 'guile not installed', 10 if ! $isInstalled;
-  my $modulesInstalled = -f '/etc/profile.d/modules.sh';
-  my $setup = $modulesInstalled ?
-              ". /etc/profile.d/modules.sh; module load guile" :
-              'echo > /dev/null'; # noop
-  $output = `$setup; guile $TESTFILE.scm 2>&1`;
+  $output = `module load guile; guile $TESTFILE.scm 2>&1`;
   ok($? == 0, 'guile program runs');
   like($output, qr/Hello world/, 'guile program correct output');
 
-  skip 'modules not installed', 3 if ! $modulesInstalled;
   skip 'guile not installed', 3 if ! $isInstalled;
   `/bin/ls /opt/modulefiles/compilers/guile/[0-9]* 2>&1`;
   ok($? == 0, "guile module installed");
