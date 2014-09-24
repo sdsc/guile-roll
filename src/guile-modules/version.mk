@@ -1,10 +1,9 @@
-# Get the guile version from its version.mk file. See Makefile
-VERSION.MK.MASTER = version.mk
-VERSION.MK.MASTER.DIR = ../guile
-VERSION.MK.INCLUDE = guile.version.mk
-include $(VERSION.MK.INCLUDE)
+NAME        = guile-modules
+RELEASE     = 1
+PKGROOT     = /opt/modulefiles/compilers/guile
 
-NAME       = guile-modules
-RELEASE    = 0
+VERSION_SRC = $(REDHAT.ROOT)/src/guile/version.mk
+VERSION_INC = version.inc
+include $(VERSION_INC)
 
-RPM.EXTRAS = AutoReq:No
+RPM.EXTRAS  = AutoReq:No
