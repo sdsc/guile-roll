@@ -1,6 +1,6 @@
 NAME           = opt-guile
-VERSION        = 2.0.9
-RELEASE        = 3
+VERSION        = 2.0.11
+RELEASE        = 0
 PKGROOT        = /opt/guile
 
 SRC_SUBDIR     = guile
