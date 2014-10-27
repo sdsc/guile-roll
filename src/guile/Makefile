@@ -83,7 +83,7 @@ LIBSETUP = \
   echo $${GNUTOOLSHOME}
 
 build: $(SRC_DIRS)
-	# Despite required DBW_GC/LIBFFI settings, configure fails unless those
+	# Despite required BDW_GC/LIBFFI settings, configure fails unless those
 	# paths are also in CFLAGS/LDFLAGS.  Similarly, the --with-XXXX-prefix
 	# configure opts seem non-functional, so the libtool/unistring paths
 	# also need to be in CFLAGS/LDFLAGS.
