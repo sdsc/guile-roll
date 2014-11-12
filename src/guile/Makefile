@@ -56,31 +56,32 @@
 
 REDHAT.ROOT = $(PWD)/../../
 
--include $(ROCKSROOT)/etc/Rules.mk
-include pull.mk
-
 ROLLCOMPILER = gnu
 COMPILERNAME = gnu
 
-CC = gcc
-ifeq ("$(COMPILERNAME)", "intel")
-  CC = icc
-else ifeq ("$(COMPILERNAME)", "pgi")
-  CC = pgcc
-endif
+-include $(ROCKSROOT)/etc/Rules.mk
+include $(SDSCDEVEL)/Pull.mk
+include $(SDSCDEVEL)/Rules.mk
 
-COMPILERSETUP = \
-  module load $(ROLLCOMPILER) || true; \
-  echo === Compiler and version ===; \
-  $(CC) --version
+MODULE_LOAD_GNUTOOLS = $(call MODULE_LOAD_PACKAGE, gnutools, GNUTOOLSHOME)
 
-LIBSETUP = \
-  module load gmp || true; \
-  module load gnutools || true; \
-  echo === GMPHOME ===; \
-  echo $${GMPHOME}; \
-  echo === GNUTOOLSHOME ===; \
-  echo $${GNUTOOLSHOME}
+LICENSE_FILES = $(SOURCE_DIR)/{COPYING,COPYING.LESSER,LICENSE,README}
+
+$(NAME).spec: DESCRIPTION LICENSE
+
+DESCRIPTION:
+	$(MODULE_LOAD_CC); \
+	( \
+	  $(DESCRIBE_PKG); \
+	  $(DESCRIBE_CC); \
+	  $(DESCRIBE_GMP) \
+	) > $@
+
+LICENSE: $(SRC_DIRS)
+	if ! grep -qF "License, version 3 or later" $(SOURCE_DIR)/LICENSE; then \
+	  exit 2; \
+	fi
+	echo GPLv3+ and LGPLv3+ > $@
 
 build: $(SRC_DIRS)
 	# Despite required BDW_GC/LIBFFI settings, configure fails unless those
@@ -88,8 +89,9 @@ build: $(SRC_DIRS)
 	# configure opts seem non-functional, so the libtool/unistring paths
 	# also need to be in CFLAGS/LDFLAGS.
 	( \
-	  $(COMPILERSETUP); \
-	  $(LIBSETUP); \
+	  $(MODULE_LOAD_CC); \
+	  $(MODULE_LOAD_GMP); \
+	  $(MODULE_LOAD_GNUTOOLS); \
 	  cd $(SOURCE_DIR); \
 	  export CFLAGS="-I$${GMPHOME}/include -I$${GNUTOOLSHOME}/include"; \
 	  export LDFLAGS="-L$${GMPHOME}/lib -L$${GNUTOOLSHOME}/lib -L$${GNUTOOLSHOME}/lib64"; \
@@ -104,11 +106,12 @@ build: $(SRC_DIRS)
 install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
-	  $(COMPILERSETUP); \
-	  $(LIBSETUP); \
+	  $(MODULE_LOAD_CC); \
+	  $(MODULE_LOAD_GNUTOOLS); \
 	  cd $(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
+	$(INSTALL_LICENSE_FILES)
 
 clean::
-	rm -rf $(SOURCE_DIR)
+	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE
