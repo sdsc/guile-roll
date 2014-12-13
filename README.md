@@ -19,10 +19,18 @@ Rocks development machine.
 
 ## Dependencies
 
-The guile build process requires a number of other GNU packages be installed
-on the build system, including the bdwgc, libffi and libunistring libraries,
-as well as the latest versions of autoconf/make, binutils, and texinfo.  All
-these GNU packages are included in SDSC's gnutools roll.
+The sdsc-roll must be installed on the build machine, since the build process
+depends on make include files provided by that roll.
+
+The roll sources assume that modulefiles provided by SDSC compiler
+rolls are available, but it will build without them as long as the environment
+variables they provide are otherwise defined.
+
+The guile build process requires a number of other packages be installed on the
+build system, including the libffi and libunistring libraries, as well as the
+latest versions of autoconf/make, binutils, and texinfo.  All these packages
+are included in SDSC's gnutools roll.
+
 
 ## Building
 
