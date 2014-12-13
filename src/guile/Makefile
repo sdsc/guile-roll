@@ -65,8 +65,6 @@ include $(SDSCDEVEL)/Rules.mk
 
 MODULE_LOAD_GNUTOOLS = $(call MODULE_LOAD_PACKAGE, gnutools, GNUTOOLSHOME)
 
-LICENSE_FILES = $(SOURCE_DIR)/{COPYING,COPYING.LESSER,LICENSE,README}
-
 $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
@@ -78,9 +76,7 @@ DESCRIPTION:
 	) > $@
 
 LICENSE: $(SRC_DIRS)
-	if ! grep -qF "License, version 3 or later" $(SOURCE_DIR)/LICENSE; then \
-	  exit 2; \
-	fi
+	$(CHECK_LICENSE_FILES)
 	echo GPLv3+ and LGPLv3+ > $@
 
 build: $(SRC_DIRS)
