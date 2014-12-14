@@ -88,11 +88,16 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_GMP); \
 	  $(MODULE_LOAD_GNUTOOLS); \
-	  cd $(SOURCE_DIR); \
+	  BDWGCHOME=`pwd`/$(SOURCE_DIR)/bdwgc; \
+	  cd $(BDWGC_DIR); \
+	  ./configure --prefix=$$BDWGCHOME --enable-threads=pthreads; \
+	  make; \
+	  make install; \
+	  cd ../$(SOURCE_DIR); \
 	  export CFLAGS="-I$${GMPHOME}/include -I$${GNUTOOLSHOME}/include"; \
 	  export LDFLAGS="-L$${GMPHOME}/lib -L$${GNUTOOLSHOME}/lib -L$${GNUTOOLSHOME}/lib64"; \
-	  export BDW_GC_LIBS="-lgc"; \
-	  export BDW_GC_CFLAGS=-I$${GNUTOOLSHOME}/include; \
+	  export BDW_GC_LIBS="-L$$BDWGCHOME/lib -lgc"; \
+	  export BDW_GC_CFLAGS=-I$$BDWGCHOME/include; \
 	  export LIBFFI_LIBS="-lffi"; \
 	  export LIBFFI_CFLAGS=-I$${GNUTOOLSHOME}/include; \
 	  ./configure --prefix=$(PKGROOT); \
