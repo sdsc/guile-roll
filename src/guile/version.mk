@@ -1,6 +1,6 @@
 NAME           = sdsc-guile
 VERSION        = 2.0.11
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/guile
 
 SRC_SUBDIR     = guile

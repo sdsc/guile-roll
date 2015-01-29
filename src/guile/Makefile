@@ -109,7 +109,9 @@ install::
 	( \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_GNUTOOLS); \
-	  cd $(SOURCE_DIR); \
+	  cd $(BDWGC_DIR); \
+	  make prefix=$(ROOT)/$(PKGROOT) install; \
+	  cd ../$(SOURCE_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install \
 	)
 	$(INSTALL_LICENSE_FILES)
