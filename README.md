@@ -27,9 +27,9 @@ rolls are available, but it will build without them as long as the environment
 variables they provide are otherwise defined.
 
 The guile build process requires a number of other packages be installed on the
-build system, including the libffi and libunistring libraries, as well as the
-latest versions of autoconf/make, binutils, and texinfo.  All these packages
-are included in SDSC's gnutools roll.
+build system, including the gmp, libffi, and libunistring libraries, as well as
+the latest versions of autoconf/make, binutils, and texinfo.  All these packages
+are included in SDSC's gnucompiler and gnutools rolls.
 
 
 ## Building
