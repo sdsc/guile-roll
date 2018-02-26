@@ -1,6 +1,6 @@
 <?xml version="1.0" standalone="no"?>
 
-<kickstart>
+<graph>
 
 <description>
 GNU guile
@@ -12,8 +12,18 @@ Copyright (c) 2000 - 2017 The Regents of the University of California.
 All rights reserved. Rocks(r) v7.0 www.rocksclusters.org
 </copyright>
 
-<package>sdsc-guile-modules</package>
-<package>sdsc-guile</package>
-<package>sdsc-guile-roll-test</package>
+<edge from="compute">
+  <to>guile-common</to>
+</edge>
+<order head="compute">
+  <tail>guile-common</tail>
+</order>
 
-</kickstart>
+<edge from="login">
+  <to>guile-common</to>
+</edge>
+<order head="login">
+  <tail>guile-common</tail>
+</order>
+
+</graph>
