@@ -1,6 +1,6 @@
 NAME           = sdsc-guile
 VERSION        = 2.0.11
-RELEASE        = 3
+RELEASE        = 4
 PKGROOT        = /opt/guile
 
 SRC_SUBDIR     = guile
@@ -19,4 +19,5 @@ BDWGC_DIR      = $(BDWGC_PKG:%.$(BDWGC_SUFFIX)=%)
 
 TAR_GZ_PKGS    = $(SOURCE_PKG) $(BDWGC_PKG)
 
-RPM.EXTRAS     = AutoReq:No
+RPM.EXTRAS     = AutoReq:No\nAutoProv:No
+RPM.PREFIX     = $(PKGROOT)
