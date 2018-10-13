@@ -1,6 +1,6 @@
 NAME           = sdsc-guile
-VERSION        = 2.0.11
-RELEASE        = 4
+VERSION        = 2.2.4
+RELEASE        = 0
 PKGROOT        = /opt/guile
 
 SRC_SUBDIR     = guile
@@ -13,7 +13,7 @@ SOURCE_DIR     = $(SOURCE_PKG:%.$(SOURCE_SUFFIX)=%)
 
 BDWGC_NAME     = bdwgc
 BDWGC_SUFFIX   = tar.gz
-BDWGC_VERSION  = 7.2alpha7
+BDWGC_VERSION  = 7.6.8
 BDWGC_PKG      = $(BDWGC_NAME)-$(BDWGC_VERSION).$(BDWGC_SUFFIX)
 BDWGC_DIR      = $(BDWGC_PKG:%.$(BDWGC_SUFFIX)=%)
 
