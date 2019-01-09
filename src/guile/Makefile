@@ -115,9 +115,9 @@ install::
           export CXX=$(CXX): \
 	  $(MODULE_LOAD_GNUTOOLS); \
 	  cd $(BDWGC_DIR); \
-	  make prefix=$(ROOT)/$(PKGROOT) install; \
+	  make prefix=$(PKGROOT) install; \
 	  cd ../$(SOURCE_DIR); \
-	  make prefix=$(ROOT)/$(PKGROOT) install \
+	  make prefix=$(PKGROOT) install \
 	)
 	$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
