@@ -88,6 +88,8 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_GMP); \
 	  $(MODULE_LOAD_GNUTOOLS); \
+          export CC=$(CC): \
+          export CXX=$(CXX): \
 	  BDWGCHOME=`pwd`/$(SOURCE_DIR)/bdwgc; \
 	  cd $(BDWGC_DIR); \
 	  ./configure --prefix=$$BDWGCHOME --enable-threads=pthreads; \
@@ -108,6 +110,8 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	( \
 	  $(MODULE_LOAD_CC); \
+          export CC=$(CC): \
+          export CXX=$(CXX): \
 	  $(MODULE_LOAD_GNUTOOLS); \
 	  cd $(BDWGC_DIR); \
 	  make prefix=$(ROOT)/$(PKGROOT) install; \
