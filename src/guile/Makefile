@@ -88,8 +88,8 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_GMP); \
 	  $(MODULE_LOAD_GNUTOOLS); \
-          export CC=$(CC): \
-          export CXX=$(CXX): \
+          export CC=$(CC); \
+          export CXX=$(CXX); \
 	  BDWGCHOME=`pwd`/$(SOURCE_DIR)/bdwgc; \
 	  cd $(BDWGC_DIR); \
 	  ./configure --prefix=$$BDWGCHOME --enable-threads=pthreads; \
