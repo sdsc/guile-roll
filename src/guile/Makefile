@@ -93,8 +93,8 @@ build: $(SRC_DIRS)
 	  BDWGCHOME=`pwd`/$(SOURCE_DIR)/bdwgc; \
 	  cd $(BDWGC_DIR); \
 	  ./configure --prefix=$$BDWGCHOME --enable-threads=pthreads; \
-	  make; \
-	  make install; \
+	  $(MAKE); \
+	  $(MAKE) install; \
 	  cd ../$(SOURCE_DIR); \
 	  export CFLAGS="-I$${GMPHOME}/include -I$${GNUTOOLSHOME}/include"; \
 	  export LDFLAGS="-L$${GMPHOME}/lib -L$${GNUTOOLSHOME}/lib -L$${GNUTOOLSHOME}/lib64"; \
@@ -103,7 +103,7 @@ build: $(SRC_DIRS)
 	  export LIBFFI_LIBS="-lffi"; \
 	  export LIBFFI_CFLAGS=-I$${GNUTOOLSHOME}/include; \
 	  ./configure --prefix=$(PKGROOT); \
-	  make -j 16 \
+	  $(MAKE) -j 16 \
 	)
 
 install::
@@ -115,9 +115,9 @@ install::
           export CXX=$(CXX): \
 	  $(MODULE_LOAD_GNUTOOLS); \
 	  cd $(BDWGC_DIR); \
-	  make prefix=$(PKGROOT) install; \
+	  $(MAKE) prefix=$(PKGROOT) install; \
 	  cd ../$(SOURCE_DIR); \
-	  make prefix=$(PKGROOT) install \
+	  $(MAKE) prefix=$(PKGROOT) install \
 	)
 	$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
