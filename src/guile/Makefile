@@ -63,7 +63,6 @@ COMPILERNAME = gnu
 include $(SDSCDEVEL)/Pull.mk
 include $(SDSCDEVEL)/Rules.mk
 
-MODULE_LOAD_GNUTOOLS = $(call MODULE_LOAD_PACKAGE, gnutools, GNUTOOLSHOME)
 
 $(NAME).spec: DESCRIPTION LICENSE
 
@@ -87,7 +86,6 @@ build: $(SRC_DIRS)
 	( \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_GMP); \
-	  $(MODULE_LOAD_GNUTOOLS); \
           export CC=$(CC); \
           export CXX=$(CXX); \
 	  BDWGCHOME=`pwd`/$(SOURCE_DIR)/bdwgc; \
@@ -96,13 +94,12 @@ build: $(SRC_DIRS)
 	  $(MAKE); \
 	  $(MAKE) install; \
 	  cd ../$(SOURCE_DIR); \
-	  export CFLAGS="-I$${GMPHOME}/include -I$${GNUTOOLSHOME}/include"; \
-	  export LDFLAGS="-L$${GMPHOME}/lib -L$${GNUTOOLSHOME}/lib -L$${GNUTOOLSHOME}/lib64"; \
+	  export CFLAGS="-I$${GMPHOME}/include"; \
+	  export LDFLAGS="-L$${GMPHOME}/lib"; \
 	  export BDW_GC_LIBS="-L$$BDWGCHOME/lib -lgc"; \
 	  export BDW_GC_CFLAGS=-I$$BDWGCHOME/include; \
 	  export LIBFFI_LIBS="-lffi"; \
-	  export LIBFFI_CFLAGS=-I$${GNUTOOLSHOME}/include; \
-	  ./configure --prefix=$(PKGROOT); \
+	  ./configure --prefix=$(PKGROOT) --with-libunistring-prefix=/usr; \
 	  $(MAKE) -j 16 \
 	)
 
@@ -111,9 +108,8 @@ install::
 	$(PKGROOT_BIND_MOUNT)
 	( \
 	  $(MODULE_LOAD_CC); \
-          export CC=$(CC): \
-          export CXX=$(CXX): \
-	  $(MODULE_LOAD_GNUTOOLS); \
+          export CC=$(CC); \
+          export CXX=$(CXX); \
 	  cd $(BDWGC_DIR); \
 	  $(MAKE) prefix=$(PKGROOT) install; \
 	  cd ../$(SOURCE_DIR); \

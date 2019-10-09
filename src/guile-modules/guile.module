@@ -1,3 +1,5 @@
 #%Module1.0
 setenv GUILEHOME /opt/guile
+module load ROLLCOMPILER
 prepend-path PATH /opt/guile/bin
+prepend-path LD_LIBRARY_PATH /opt/guile/lib
